@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MAXX DRIFT 3D — PRASHANT MAXX</title>
+  <title>PRASHANT THAR 3D — City Drive | PRASHANT MAXX</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
@@ -24,7 +24,7 @@
       <b id="scoreVal">0</b>
     </div>
     <div class="stat-box">
-      <span>CORES</span>
+      <span>TOKENS</span>
       <b id="coreVal">0</b>
     </div>
     <div class="stat-box">
@@ -34,22 +34,58 @@
     <button class="mute-btn" id="muteBtn" onclick="toggleAudio()">🔊</button>
   </div>
 
-  <div class="color-bar">
-    <button style="background:#0ea5e9" onclick="setCarColor(0x0ea5e9)" title="Cyan"></button>
-    <button style="background:#f43f5e" onclick="setCarColor(0xf43f5e)" title=" Crimson"></button>
-    <button style="background:#10b981" onclick="setCarColor(0x10b981)" title="Emerald"></button>
-    <button style="background:#f59e0b" onclick="setCarColor(0xf59e0b)" title="Gold"></button>
+  <!-- Left Side: BRAKE Pedal -->
+  <div class="left-pedals">
+    <button
+      class="pedal-btn brake-pedal"
+      onpointerdown="setKey('ArrowDown',true)"
+      onpointerup="setKey('ArrowDown',false)"
+      onpointerleave="setKey('ArrowDown',false)"
+      onpointercancel="setKey('ArrowDown',false)"
+    >
+      <span class="pedal-holes"></span>
+      <b>BRAKE</b>
+    </button>
   </div>
 
-  <div class="controls-hint">
-    WASD / Arrows: Drive & Steer • Space: Boost • Drag: Orbit Camera
+  <!-- Right Side: BACK/BOOST Pedal right beside FRONT/GAS Pedal -->
+  <div class="right-pedals">
+    <button
+      class="pedal-btn back-pedal"
+      onpointerdown="setKey('Space',true)"
+      onpointerup="setKey('Space',false)"
+      onpointerleave="setKey('Space',false)"
+      onpointercancel="setKey('Space',false)"
+    >
+      <span class="pedal-holes"></span>
+      <b>BOOST</b>
+    </button>
+    <button
+      class="pedal-btn gas-pedal"
+      onpointerdown="setKey('ArrowUp',true)"
+      onpointerup="setKey('ArrowUp',false)"
+      onpointerleave="setKey('ArrowUp',false)"
+      onpointercancel="setKey('ArrowUp',false)"
+    >
+      <span class="pedal-holes"></span>
+      <b>GAS</b>
+    </button>
   </div>
 
-  <div class="touch-pad">
-    <button onpointerdown="setKey('ArrowLeft',true)" onpointerup="setKey('ArrowLeft',false)" onpointerleave="setKey('ArrowLeft',false)">◀</button>
-    <button onpointerdown="setKey('ArrowUp',true)" onpointerup="setKey('ArrowUp',false)" onpointerleave="setKey('ArrowUp',false)">▲</button>
-    <button onpointerdown="setKey('Space',true)" onpointerup="setKey('Space',false)" onpointerleave="setKey('Space',false)">⚡</button>
-    <button onpointerdown="setKey('ArrowRight',true)" onpointerup="setKey('ArrowRight',false)" onpointerleave="setKey('ArrowRight',false)">▶</button>
+  <!-- Optional Steering Bar above bottom pedals -->
+  <div class="steer-bar">
+    <button
+      onpointerdown="setKey('ArrowLeft',true)"
+      onpointerup="setKey('ArrowLeft',false)"
+      onpointerleave="setKey('ArrowLeft',false)"
+      onpointercancel="setKey('ArrowLeft',false)"
+    >◀ LEFT</button>
+    <button
+      onpointerdown="setKey('ArrowRight',true)"
+      onpointerup="setKey('ArrowRight',false)"
+      onpointerleave="setKey('ArrowRight',false)"
+      onpointercancel="setKey('ArrowRight',false)"
+    >RIGHT ▶</button>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
