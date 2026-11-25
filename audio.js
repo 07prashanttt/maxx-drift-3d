@@ -33,5 +33,5 @@ function playCorePickup() {
 }
 
 function playBoostPulse() {
-  playTone(220, 0.14, 'sawtooth', 0.04);
+  playTone(210, 0.14, 'sawtooth', 0.045);
 }
