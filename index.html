@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PRASHANT THAR 3D — City Drive | PRASHANT MAXX</title>
+  <title>PRASHANT THAR 3D — Highway Drive | PRASHANT MAXX</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Top-Right AI Creator Tag -->
   <div class="creator-tag">
     <span class="pulse-dot"></span>
     <div class="creator-text">
@@ -18,74 +19,89 @@
     </div>
   </div>
 
-  <div class="hud-top">
-    <div class="stat-box">
-      <span>SCORE</span>
-      <b id="scoreVal">0</b>
+  <!-- Top-Left Minimap + Camera & Respawn Buttons -->
+  <div class="top-left-stack">
+    <div class="minimap-box">
+      <canvas id="minimapCanvas" width="110" height="110"></canvas>
+      <span class="map-n">N</span>
     </div>
-    <div class="stat-box">
-      <span>TOKENS</span>
-      <b id="coreVal">0</b>
-    </div>
-    <div class="stat-box">
-      <span>SPEED</span>
-      <b id="speedVal">0 KM/H</b>
-    </div>
-    <button class="mute-btn" id="muteBtn" onclick="toggleAudio()">🔊</button>
+    <button class="round-tool" title="Switch Camera" onclick="cycleCamera()">📷</button>
+    <button class="round-tool" title="Reset Car" onclick="resetThar()">↻</button>
+    <button class="round-tool" id="muteBtn" title="Sound" onclick="toggleAudio()">🔊</button>
   </div>
 
-  <!-- Left Side: BRAKE Pedal -->
-  <div class="left-pedals">
-    <button
-      class="pedal-btn brake-pedal"
-      onpointerdown="setKey('ArrowDown',true)"
-      onpointerup="setKey('ArrowDown',false)"
-      onpointerleave="setKey('ArrowDown',false)"
-      onpointercancel="setKey('ArrowDown',false)"
-    >
-      <span class="pedal-holes"></span>
-      <b>BRAKE</b>
-    </button>
+  <!-- Top-Center-Right Coins & Pause -->
+  <div class="top-coins-bar">
+    <div class="coin-pill">
+      <span class="coin-icon">$</span>
+      <b id="scoreVal">12500</b>
+    </div>
+    <button class="round-tool pause-tool" id="pauseBtn" onclick="togglePause()">❚❚</button>
   </div>
 
-  <!-- Right Side: BACK/BOOST Pedal right beside FRONT/GAS Pedal -->
-  <div class="right-pedals">
+  <!-- Speedometer Gauge Top-Right (below creator tag) -->
+  <div class="speedo-box">
+    <div class="dial-ticks"></div>
+    <div class="speed-readout">
+      <b id="speedVal">0</b>
+      <span>KM/H</span>
+    </div>
+    <div class="fuel-bar"><div class="fuel-fill" id="fuelFill"></div></div>
+  </div>
+
+  <!-- Gear Selector P R N D -->
+  <div class="gear-box" id="gearBox">
+    <button data-gear="P" onclick="setGear('P')">P</button>
+    <button data-gear="R" onclick="setGear('R')">R</button>
+    <button data-gear="N" onclick="setGear('N')">N</button>
+    <button data-gear="D" class="active" onclick="setGear('D')">D</button>
+  </div>
+
+  <!-- Bottom-Left Interactive Steering Wheel -->
+  <div class="wheel-zone">
+    <div class="steering-wheel" id="steeringWheel">
+      <div class="wheel-ring"></div>
+      <div class="wheel-spoke-h"></div>
+      <div class="wheel-spoke-d"></div>
+      <div class="wheel-hub">
+        <span class="hub-crown">♛</span>
+        <span class="hub-name">PRASHANT</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom-Right NOS + BRAKE + GAS -->
+  <div class="right-controls">
     <button
-      class="pedal-btn back-pedal"
+      class="nos-btn"
       onpointerdown="setKey('Space',true)"
       onpointerup="setKey('Space',false)"
       onpointerleave="setKey('Space',false)"
       onpointercancel="setKey('Space',false)"
     >
-      <span class="pedal-holes"></span>
-      <b>BOOST</b>
+      <span>NOS</span>
     </button>
-    <button
-      class="pedal-btn gas-pedal"
-      onpointerdown="setKey('ArrowUp',true)"
-      onpointerup="setKey('ArrowUp',false)"
-      onpointerleave="setKey('ArrowUp',false)"
-      onpointercancel="setKey('ArrowUp',false)"
-    >
-      <span class="pedal-holes"></span>
-      <b>GAS</b>
-    </button>
-  </div>
 
-  <!-- Optional Steering Bar above bottom pedals -->
-  <div class="steer-bar">
-    <button
-      onpointerdown="setKey('ArrowLeft',true)"
-      onpointerup="setKey('ArrowLeft',false)"
-      onpointerleave="setKey('ArrowLeft',false)"
-      onpointercancel="setKey('ArrowLeft',false)"
-    >◀ LEFT</button>
-    <button
-      onpointerdown="setKey('ArrowRight',true)"
-      onpointerup="setKey('ArrowRight',false)"
-      onpointerleave="setKey('ArrowRight',false)"
-      onpointercancel="setKey('ArrowRight',false)"
-    >RIGHT ▶</button>
+    <div class="pedals-row">
+      <button
+        class="pedal brake-p"
+        onpointerdown="setKey('ArrowDown',true)"
+        onpointerup="setKey('ArrowDown',false)"
+        onpointerleave="setKey('ArrowDown',false)"
+        onpointercancel="setKey('ArrowDown',false)"
+      >
+        <i></i><i></i><i></i>
+      </button>
+      <button
+        class="pedal gas-p"
+        onpointerdown="setKey('ArrowUp',true)"
+        onpointerup="setKey('ArrowUp',false)"
+        onpointerleave="setKey('ArrowUp',false)"
+        onpointercancel="setKey('ArrowUp',false)"
+      >
+        <i></i><i></i><i></i>
+      </button>
+    </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
